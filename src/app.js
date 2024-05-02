@@ -4,7 +4,8 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 app.use("/api/",require("./routes/login"))
-const database = require("./database/db_mongo")
+const DatabaseConexion =require("./database/DatabaseConexion")
+const database = new DatabaseConexion();
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });

@@ -4,9 +4,14 @@ const password = process.env.MONGO_PASSWORD;
 const host = process.env.MONGO_HOST;
 const port = process.env.MONGO_PORT;
 
-class Database {
+class DatabaseConexion {
+  static instance
   constructor() {
+    if (!!DatabaseConexion.instance) {
+      return DatabaseConexion.instance;
+    }
     this.isConnected = false;
+    DatabaseConexion.instance=this
   }
 
   async connect() {
@@ -31,7 +36,5 @@ class Database {
   }
 }
 
-const database = new Database();
-
-module.exports = database;
+module.exports = DatabaseConexion;
 
